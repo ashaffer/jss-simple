@@ -59,9 +59,18 @@ Or on the server:
 
 ```javascript
 import App from 'components/app'
-import {toString} from 'jss-simple'
+import * as jss from 'jss-simple'
+import extend from 'jss-extend'
+import nested from 'jss-nested'
+import prefixer from 'jss-vendor-prefixer'
+import camelCase from 'jss-camel-case'
 
-const style = toString()
+const style = jss
+  .use(extend)
+  .use(nested)
+  .use(camelCase)
+  .use(prefixer)
+  .toString()
 
 export default function renderPage (args) {
   return `

@@ -20,7 +20,8 @@ function css (style) {
 }
 
 function use (plugin) {
-  return jss.use(plugin)
+  jss.use(plugin)
+  return {use, toString, attach}
 }
 
 function toString () {
