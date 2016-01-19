@@ -11,7 +11,7 @@ Thin wrapper around [jss](https://github.com/jsstyles/jss) that simplifies its i
 
 ## Usage
 
-jss-simple is designed specifically for global, single-stylesheet, statically determined styles, and its interface is optimized to reflect that. Instead of creating stylesheets, jss-simple maintains a single stylesheet internally for you, which you can either `toString` or `attach` whenever your components have all been imported.
+jss-simple is designed specifically for global, single-sheet, statically determined styles and its interface is optimized to reflect that. Instead of creating stylesheets, jss-simple maintains a single stylesheet internally for you, which you can either `toString` or `attach` whenever your components have all been imported.
 
 This means that before you call `toString/attach` all your style rules must have been added, which means you must make sure that they are evaluated at import/require time - which generally means that they are in the outer-most scope of your module.  E.g.
 
