@@ -95,6 +95,10 @@ export default function renderPage (args) {
   * `detach()` - Detach the global sheet (useful for hot reloading, etc.).
   * `toString()` - Render the global sheet and return it as a string.
 
+## Plugins
+
+jss-simple just uses regular [jss plugins](https://github.com/jsstyles/jss#plugins). Nothing special here, just `.use` them as you normally would.
+
 ## License
 
 MIT
