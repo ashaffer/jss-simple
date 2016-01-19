@@ -11,9 +11,9 @@ Thin wrapper around [jss](https://github.com/jsstyles/jss) that simplifies its i
 
 ## Usage
 
-jss-simple is designed specifically for global, single-sheet, statically determined styles and its interface is optimized to reflect that. Instead of creating stylesheets, jss-simple maintains a single stylesheet internally for you, which you can either `toString` or `attach` whenever your components have all been imported.
+jss-simple is designed specifically for global, single-sheet, statically determined styles. Instead of creating stylesheets, jss-simple maintains a single stylesheet internally for you, which you can either `toString` or `attach` whenever your components have all been imported.
 
-This means that before you call `toString/attach` all your style rules must have been added, which means you must make sure that they are evaluated at import/require time - which generally means that they are in the outer-most scope of your module.  E.g.
+This means that before you call `toString/attach` all your style rules must have been added. So you must make sure that they are evaluated at import/require time - which generally means that they are in the outer-most scope of your module.  E.g.
 
 *Bad:*
 ```javascript
@@ -45,13 +45,13 @@ export default function render ({props}) {
 }
 ```
 
-This means that once you've required your top-level component (which requires all of your other components, transitively), your stylesheet should be complete. So at the top of your app you can do:
+Once you've required your top-level component (which requires all of your other components, transitively), your stylesheet should be complete. So at the top of your app you can do:
 
 ```javascript
 import App from 'components/app'
-import {attach} from 'jss-simple'
+import * as jss from 'jss-simple'
 
-attach()
+jss.attach()
 render(<App />)
 ```
 
@@ -84,6 +84,32 @@ export default function renderPage (args) {
         ${render(<App />, args)}
       </body>
     </html>`
+}
+```
+
+Or with hot reloading on the client using [vdux](https://github.com/ashaffer/vdux):
+
+```
+// ...imports...
+import * as jss from 'jss-simple'
+
+jss.attach()
+
+let hmr
+domready(() => hmr = vdux({
+  middleware,
+  reducer,
+  initialState: window.__initialState__,
+  app: state => <App state={state} />
+}))
+
+if (module.hot) {
+  module.hot.decline()
+  module.hot.accept(['./components/app', './reducer'], () => {
+    jss.detach()
+    hmr.replace(require('./components/app').default, require('./reducer').default)
+    jss.attach()
+  })
 }
 ```
 
