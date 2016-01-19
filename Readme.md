@@ -92,6 +92,7 @@ export default function renderPage (args) {
   * `css(obj)` - Default export. Add `obj` to the global sheet's rules.
   * `use(plugin)` - Add a jss plugin.
   * `attach()` - Attach the global sheet to the DOM.
+  * `detach()` - Detach the global sheet (useful for hot reloading, etc.).
   * `toString()` - Render the global sheet and return it as a string.
 
 ## License

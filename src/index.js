@@ -9,14 +9,16 @@ import {create} from 'jss'
  */
 
 const jss = create()
-const sheet = jss.createStyleSheet()
+const sheets = []
 
 /**
  * JSS Simple
  */
 
 function css (style) {
-  return sheet.addRule(style).classes
+  const sheet = jss.createStyleSheet(style)
+  sheets.push(sheet)
+  return sheet.classes
 }
 
 function use (plugin) {
@@ -25,11 +27,15 @@ function use (plugin) {
 }
 
 function toString () {
-  return sheet.toString()
+  return sheets.map(sheet => sheet.toString()).join('\n')
 }
 
 function attach () {
-  return sheet.attach()
+  return sheets.forEach(sheet => sheet.attach())
+}
+
+function detach () {
+  return sheets.forEach(sheet => sheet.detach())
 }
 
 /**
@@ -40,5 +46,6 @@ export default css
 export {
   use,
   toString,
-  attach
+  attach,
+  detach
 }
