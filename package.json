@@ -2,7 +2,7 @@
   "name": "jss-simple",
   "description": "Thin wrapper around jss that simplifies its interface and restricts you to a single stylesheet.",
   "repository": "git://github.com/ashaffer/jss-simple.git",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
