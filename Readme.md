@@ -40,8 +40,8 @@ const style = css({
   }
 })
 
-export default function render () {
-  return <div class={style.primary}>{this.props.text}</div>
+export default function render ({props}) {
+  return <div class={style.primary}>{props.text}</div>
 }
 ```
 
