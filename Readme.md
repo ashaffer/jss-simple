@@ -115,15 +115,24 @@ if (module.hot) {
 
 ## API
 
-  * `css(obj)` - Default export. Add `obj` to the global sheet's rules. Returns only the `classes` property from the sheet. So you have `css({primary: {color: 'green'}}) -> {primary: <generatedClassName>}`
+  * `css(obj, key)` - Default export. Add `obj` to the global sheet's rules. Returns only the `classes` property from the sheet. So you have `css({primary: {color: 'green'}}) -> {primary: <generatedClassName>}`. The `key` parameter is optional, and can be used in development to prevent styles from accumulating when using hot module replacement.
   * `use(plugin)` - Add a jss plugin.
   * `attach()` - Attach the global sheet to the DOM.
-  * `detach()` - Detach the global sheet (useful for hot reloading, etc.).
   * `toString()` - Render the global sheet and return it as a string.
+  * `detach()` - Detach the global sheet (useful for hot reloading, etc.).
+  * `clear()` - Clear the internal stylesheet. (useful for hot reloading).
 
 ## Plugins
 
 jss-simple just uses regular [jss plugins](https://github.com/jsstyles/jss#plugins). Nothing special here, just `.use` them as you normally would.
+
+## Hot Reloading
+
+You can just use jss-simple as demonstrated in the example above, and it will work just fine. However, since it can't tell which stylesheets are the new ones, they'll just keep accumulating, and your browser may become slow. To fix this, there is a second parameter to `css` called `key`. You can pass one yourself like this:
+
+`css({...style...}, __filename)`
+
+Or you can use this babel plugin in development to automatically do it for you: [babel-plugin-jss-simple](https://github.com/ashaffer/babel-plugin-jss-simple).
 
 ## License
 

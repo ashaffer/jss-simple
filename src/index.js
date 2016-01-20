@@ -9,14 +9,25 @@ import {create} from 'jss'
  */
 
 const jss = create()
-const sheets = []
+let sheets = []
+let map = {}
 
 /**
  * JSS Simple
  */
 
-function css (style) {
+function css (style, key) {
   const sheet = jss.createStyleSheet(style)
+
+  if (key !== undefined) {
+    if (map[key] !== undefined) {
+      sheets[map[key]] = sheet
+      return sheet.classes
+    }
+
+    map[key] = sheets.length
+  }
+
   sheets.push(sheet)
   return sheet.classes
 }
@@ -38,6 +49,11 @@ function detach () {
   return sheets.forEach(sheet => sheet.detach())
 }
 
+function clear () {
+  sheets = []
+  map = {}
+}
+
 /**
  * Exports
  */
@@ -47,5 +63,6 @@ export {
   use,
   toString,
   attach,
-  detach
+  detach,
+  clear
 }
