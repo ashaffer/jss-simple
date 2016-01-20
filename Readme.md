@@ -115,7 +115,7 @@ if (module.hot) {
 
 ## API
 
-  * `css(obj)` - Default export. Add `obj` to the global sheet's rules.
+  * `css(obj)` - Default export. Add `obj` to the global sheet's rules. Returns only the `classes` property from the sheet. So you have `css({primary: {color: 'green'}}) -> {primary: <generatedClassName>}`
   * `use(plugin)` - Add a jss plugin.
   * `attach()` - Attach the global sheet to the DOM.
   * `detach()` - Detach the global sheet (useful for hot reloading, etc.).
