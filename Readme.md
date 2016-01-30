@@ -115,7 +115,7 @@ if (module.hot) {
 
 ## API
 
-  * `css(obj, key)` - Default export. Add `obj` to the global sheet's rules. Returns only the `classes` property from the sheet. So you have `css({primary: {color: 'green'}}) -> {primary: <generatedClassName>}`. The `key` parameter is optional, and can be used in development to prevent styles from accumulating when using hot module replacement.
+  * `css(obj, opts, key)` - Default export. Add `obj` to the global sheet's rules. Returns only the `classes` property from the sheet. So you have `css({primary: {color: 'green'}}) -> {primary: <generatedClassName>}`. The `key` parameter is optional, and can be used in development to prevent styles from accumulating when using hot module replacement.
   * `use(plugin)` - Add a jss plugin.
   * `attach()` - Attach the global sheet to the DOM.
   * `toString()` - Render the global sheet and return it as a string.
