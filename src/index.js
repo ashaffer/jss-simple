@@ -16,8 +16,13 @@ let map = {}
  * JSS Simple
  */
 
-function css (style, key) {
-  const sheet = jss.createStyleSheet(style)
+function css (style, opts, key) {
+  if ('string' === typeof opts) {
+    key = opts
+    opts = undefined
+  }
+
+  const sheet = jss.createStyleSheet(style, opts)
 
   if (key !== undefined) {
     if (map[key] !== undefined) {
